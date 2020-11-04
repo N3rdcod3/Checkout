@@ -1,0 +1,13 @@
+<div class="jumbotron"> 
+    <h1 class="text-success"> Choose payment method </h1>
+    <form id="choose-payment">
+        {{#each response.paymentMethods}}
+            {{#each this.brands}}
+             <input id="{{this}}"type="radio" name="pmethod" value="{{this}}"> 
+             <label for="{{this}}"> {{this}}</label><br/>
+            {{/each}}   
+        
+        {{/each}}
+        <button class="btn btn-primary">confirm</button>
+    </form>
+</div>

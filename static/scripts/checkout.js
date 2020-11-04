@@ -10,6 +10,8 @@ $('#checkout-btn').click(function(){
         datatype:'JSON'
      })
      .then(function(r){
-         console.log(r);
+        $("#paymentoptions").html(r);
+         $("#paymentoptions").show();
+
      })
 });

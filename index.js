@@ -71,8 +71,8 @@ app.get("/getPaymentMethods", (req, res) => {
        })
       .then(response => {
         // Adyen API response is passed to the client
-        res.send( { response
-        //   response: JSON.stringify(response)
+        res.render("checkoutbox",{ 
+            response:response,layout:false      //turn off layout for the result
         });
       });
   });
