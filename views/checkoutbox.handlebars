@@ -1,13 +1,110 @@
-<div class="jumbotron"> 
+{{!-- <div class="jumbotron"> 
     <h1 class="text-success"> Choose payment method </h1>
     <form id="choose-payment">
         {{#each response.paymentMethods}}
             {{#each this.brands}}
-             <input id="{{this}}"type="radio" name="pmethod" value="{{this}}"> 
-             <label for="{{this}}"> {{this}}</label><br/>
+             <input  id="{{this}}"type="radio" name="pmethod" value="{{this}}"> 
+             <label   for="{{this}}"> {{this}}</label><br/>
             {{/each}}   
         
         {{/each}}
         <button class="btn btn-primary">confirm</button>
+    </form>
+</div> --}}
+
+
+
+<link rel="stylesheet" href="/css/checkout.css"/>
+<form role="form">
+ <div class="row">     
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row my-2 p-3 rounded alert-success">   
+                        <div class="col-6">               
+                        <h5> Total:</h5>
+                        </div>
+                       <div class="col-6 text-right"> 
+                        <h5> 150 MXN</h5>
+                        </div>
+                        </div>
+                    </div>
+                    <h3 class="panel-title">
+                        Payment Details
+                    </h3>
+
+                    <div class="icons"> 
+                        {{#each response.paymentMethods}}
+                            {{#each this.brands}}
+                            <a>
+                                <img src="/img/{{this}}.svg" class="cardicon"/>
+                            </a>
+                            {{/each}}                          
+                        {{/each}}
+                        </div>
+                    <div class="checkbox pull-right">
+                        
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="cardNumber">
+                            CARD NUMBER</label>
+                            <input class="form-control" name="type" type="text" hidden/>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" name="number" placeholder="Valid Card Number"
+                                required autofocus />
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                    EXPIRY DATE</label>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expiryMonth" name="expiryMonth" placeholder="MM" required />
+                                </div>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expiryYear" name="expiryYear" placeholder="YY" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CV CODE</label>
+                                <input type="password" class="form-control" id="cvc" name="cvc" placeholder="CV" required />
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+            
+                </div>
+            </div>
+           <div class="col-xs-12 col-md-6 ml-5">
+               <h3 class="text-center">Billing Address</h3>
+               <div class="row mt-3">
+                   <div class="col-md-6">
+                <label>Country</label>
+                    <input class="form-control my-1" id="country" name="country" type="text"/>
+                 <label>City</label>    
+                    <input class="form-control my-1" id="city" name="city" type="text"/>
+                 <label>Street</label>
+                    <input class="form-control my-1" id="street" name="street" type="text"/>
+                 <label>House Number</label>
+                    <input class="form-control my-1" id="houseNumberOrName" name="houseNumberOrName" type="text"/>
+                   </div>   
+                   <div class="col-md-6">               
+                <label>State/Province</label>        
+                    <input class="form-control my-1" id="stateOrProvince" name="stateOrProvince" type="text"/>
+                 <label>Postal Code</label>
+                    <input class="form-control my-1" id="postalCode" name="postalCode" type="text"/>
+                 <label>Email Address</label>
+                    <input class="form-control my-1" id="shopperEmail" name="shopperEmail" type="text"/>
+                   </div>               
+               </div>
+                <a class="mt-5 btn btn-success btn-lg btn-block " role="button">Pay</a>
+            </div>
+        </div>
     </form>
 </div>

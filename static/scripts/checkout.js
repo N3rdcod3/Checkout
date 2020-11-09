@@ -7,11 +7,13 @@ $('#checkout-btn').click(function(){
     $.ajax({
         url:'/getPaymentMethods',
         type: 'GET',
-        datatype:'JSON'
+        datatype:'html'
      })
      .then(function(r){
         $("#paymentoptions").html(r);
          $("#paymentoptions").show();
+         $("#proceed").hide();
+         
 
      })
 });
