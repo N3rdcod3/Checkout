@@ -3,3 +3,11 @@
     max-height: 39px;
     max-width: 54px;
 }
+.cardicon:hover{
+    border: solid #00aa014f 7px;
+}
+
+.selectedcardtype{
+    border: solid #00aa01d1 6px;
+    border-radius: 7px;
+}

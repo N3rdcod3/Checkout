@@ -13,7 +13,7 @@ app.use(express.urlencoded({ extended: true }));
 // Parse cookie bodies, and allow setting/getting cookies
 app.use(cookieParser());
  
-app.use(express.static(path.join(__dirname, "/public")));
+app.use(express.static(path.join(__dirname, "/public"))); //remove restriction, so that they can be accessed from the web browser
  
 // Adyen Node.js API library boilerplate (configuration, etc.)
 const config = new Config();
@@ -72,8 +72,62 @@ app.get("/getPaymentMethods", (req, res) => {
       .then(response => {
         // Adyen API response is passed to the client
         res.render("checkoutbox",{ 
-            response:response,layout:false      //turn off layout for the result
+            response:response,
+            layout:false      //turn off layout for the result
         });
       });
   });
+
+  app.post("/initatepayment", (req, res) => {
+    var d = req.body;
+    checkout.payments({
+        "amount": {
+          "currency": "MXN",
+          "value": 150
+        },
+        "reference": "ANJAN123",
+        "paymentMethod": {
+          "type": d.type ,
+          "number": d.number,
+          "expiryMonth": d.expiryMonth,
+          "expiryYear": "20" + d.expiryYear,
+          "holderName": "John Smith",
+          "cvc": d.cvc
+        },
+        "additionalData": {
+          "allow3DS2": true
+        },
+        "accountInfo": {
+          "accountCreationDate": "2019-01-17T13:42:40+01:00"
+        },
+        "billingAddress": {
+          "country": d.country,
+          "city": d.city,
+          "street": d.street,
+          "houseNumberOrName": d.houseNumberOrName,
+          "stateOrProvince": d.stateOrProvince,
+          "postalCode": d.postalCode
+        },
+        "shopperEmail": d.shopperEmail,
+        "shopperIP": "192.0.2.1",
+        "browserInfo": {
+          "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.110 Safari/537.36",
+          "acceptHeader": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8",
+          "language": "nl-NL",
+          "colorDepth": 24,
+          "screenHeight": 723,
+          "screenWidth": 1536,
+          "timeZoneOffset": 0,
+          "javaEnabled": true
+        },
+        "channel": "web",
+        "origin": "https://shamir.com",
+        "returnUrl": "https://shamir/checkout/",
+        "merchantAccount": config.merchantAccount
+    }).then(response => {
+      // Adyen API response is passed to the client
+      res.render(response);
+    });; 
+});
+  
   

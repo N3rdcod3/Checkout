@@ -15,7 +15,7 @@
 
 
 <link rel="stylesheet" href="/css/checkout.css"/>
-<form role="form">
+<form id="paymentMethod" role="form">
  <div class="row">     
         <div class="col-xs-12 col-md-4">
             <div class="panel panel-default">
@@ -36,7 +36,7 @@
                     <div class="icons"> 
                         {{#each response.paymentMethods}}
                             {{#each this.brands}}
-                            <a>
+                            <a id="cardtype-{{this}}" class="cardtype-btn" onclick="CardTypeSelected('{{this}}')">
                                 <img src="/img/{{this}}.svg" class="cardicon"/>
                             </a>
                             {{/each}}                          
@@ -103,7 +103,7 @@
                     <input class="form-control my-1" id="shopperEmail" name="shopperEmail" type="text"/>
                    </div>               
                </div>
-                <a class="mt-5 btn btn-success btn-lg btn-block " role="button">Pay</a>
+                <button class="mt-5 btn btn-success btn-lg btn-block " role="button">Pay</button>
             </div>
         </div>
     </form>
